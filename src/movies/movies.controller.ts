@@ -11,6 +11,7 @@ import {
 import { Movie } from './entities/movie.entity';
 import { MoviesService } from './movies.service';
 import { CreateMovieDto } from './dto/create-movie.dto';
+import { UpdateMovieDto } from './dto/update-movie.dto';
 
 @Controller('movies') // 전체 URL 역할
 export class MoviesController {
@@ -42,7 +43,7 @@ export class MoviesController {
   }
 
   @Patch('/:id') // PUT 은 특정데이터의 전체 데이터를 수정 / PATCH 는 일부 데이터를 수정
-  patch(@Param('id') movieId: number, @Body() updateData) {
+  patch(@Param('id') movieId: number, @Body() updateData: UpdateMovieDto) {
     return this.moviesService.update(movieId, updateData);
   }
 }
