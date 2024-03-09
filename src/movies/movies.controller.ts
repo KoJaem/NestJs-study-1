@@ -40,11 +40,8 @@ export class MoviesController {
     return this.moviesService.deleteOne(movieId);
   }
 
-  @Patch('/:id')
+  @Patch('/:id') // PUT 은 특정데이터의 전체 데이터를 수정 / PATCH 는 일부 데이터를 수정
   patch(@Param('id') movieId: string, @Body() updateData) {
-    return {
-      updatedMovie: movieId,
-      ...updateData,
-    };
+    return this.moviesService.update(movieId, updateData);
   }
 }
