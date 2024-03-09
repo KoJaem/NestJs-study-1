@@ -8,12 +8,16 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { Movie } from './entities/movie.entity';
+import { MoviesService } from './movies.service';
 
 @Controller('movies') // 전체 URL 역할
 export class MoviesController {
+  constructor(private readonly moviesService: MoviesService) {}
+
   @Get() // 전체URL + 뒤에 붙을 URL
-  getAll() {
-    return 'This will return all movies';
+  getAll(): Array<Movie> {
+    return this.moviesService.getAll();
   }
 
   @Get('/search')
@@ -22,19 +26,18 @@ export class MoviesController {
   }
 
   @Get('/:id') // get:/:id 가 위쪽에 있으면 다른 get 메소드가 이 부분에서 걸리므로 맨 아래에 위치하는것이 좋음
-  getOne(@Param('id') movieId: string) {
-    return `This will return one movie with the id: ${movieId}`;
+  getOne(@Param('id') movieId: string): Movie {
+    return this.moviesService.getOne(movieId);
   }
 
   @Post()
   create(@Body() movieData) {
-    console.log(movieData);
-    return movieData;
+    return this.moviesService.create(movieData);
   }
 
   @Delete('/:id')
   remove(@Param('id') movieId: string) {
-    return `This will delete a movie with the id: ${movieId}`;
+    return this.moviesService.deleteOne(movieId);
   }
 
   @Patch('/:id')
