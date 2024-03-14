@@ -2,7 +2,7 @@ import { PartialType } from '@nestjs/mapped-types';
 import { CreateMovieDto } from './create-movie.dto';
 
 export class UpdateMovieDto extends PartialType(CreateMovieDto) {
-  // PartialType: base 가 되는 Dto 에서 일부값만 사용하고 싶을때 사용
+  // ⬆️ PartialType: base 가 되는 Dto 에서 일부값만 사용하고 싶을때 사용
 }
 
 // export class UpdateMovieDto {
